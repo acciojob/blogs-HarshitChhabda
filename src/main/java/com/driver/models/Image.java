@@ -10,11 +10,23 @@ public class Image {
     private String dimensions;
     @ManyToOne
     @JoinColumn
-    Blog blog;
+    private Blog blog;
 
-    public Image(String description, String dimensions) {
+    public Image(){
+
+    }
+
+    public Image(String description, String dimensions, Blog blog) {
         this.description = description;
         this.dimensions = dimensions;
+        this.blog = blog;
+    }
+
+    public Image(int id, String description, String dimensions, Blog blog) {
+        this.id = id;
+        this.description = description;
+        this.dimensions = dimensions;
+        this.blog = blog;
     }
 
     public int getId() {

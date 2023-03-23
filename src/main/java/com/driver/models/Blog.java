@@ -15,24 +15,32 @@ public class Blog {
     private String title;
     private String content;
 
+    @CreationTimestamp
     private Date pubDate;
 
     @ManyToOne
     @JoinColumn
-    User user;
+   private User user;
     @OneToMany(mappedBy = "blog", cascade = CascadeType.ALL)
-    List<Image> imageList ;
+   private List<Image> imageList ;
 
     public Blog() {
 
     }
 
-    public Blog(String title, String content) {
-
+    public Blog(String title, String content, User user) {
         this.title = title;
         this.content = content;
-        pubDate=new Date();
-        imageList = new ArrayList<>();
+        this.user = user;
+    }
+
+    public Blog(int id, String title, String content, Date pubDate, User user, List<Image> imageList) {
+        this.id = id;
+        this.title = title;
+        this.content = content;
+        this.pubDate = pubDate;
+        this.user = user;
+        this.imageList = imageList;
     }
 
     public int getId() {

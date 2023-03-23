@@ -8,23 +8,29 @@ import java.util.List;
 public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String userName;
+    private String username;
     private String password;
-    private String firstName ;
-    private String lastName ;
+    private String firstName ="test" ;
+    private String lastName ="test";
 
     @OneToMany(mappedBy = "user" , cascade = CascadeType.ALL)
-    List<Blog> blogList ;
+   private List<Blog> blogList ;
     public User(){
 
     }
 
-    public User(String userName, String password) {
-        this.userName = userName;
+    public User(int id, String username, String password, String firstName, String lastName, List<Blog> blogList) {
+        this.id = id;
+        this.username = username;
         this.password = password;
-        firstName = "test";
-        lastName = "test";
-        blogList = new ArrayList<>();
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.blogList = blogList;
+    }
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
     }
 
     public int getId() {
@@ -35,12 +41,12 @@ public class User {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {

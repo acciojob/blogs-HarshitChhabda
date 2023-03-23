@@ -17,13 +17,11 @@ public class ImageService {
 
     public Image addImage(Integer blogId, String description, String dimensions){
         //add an image to the blog
-        Image image = new Image(description,dimensions);
         Blog blog = blogRepository2.findById(blogId).get();
-        image.setBlog(blog);
+        Image image = new Image(description,dimensions,blog);
         blog.getImageList().add(image);
         blogRepository2.save(blog);
-        return image;
-
+    return image;
     }
 
     public void deleteImage(Integer id){
@@ -31,10 +29,8 @@ public class ImageService {
     }
 
     public int countImagesInScreen(Integer id, String screenDimensions) {
-        String [] scrarray = screenDimensions.split("X"); //A=Length   X    B=Breadth
-//        if(!imageRepository2.findById(id).isPresent()){
-//            throw new Exception();
-//        }
+        String [] scrarray = screenDimensions.split("X");
+
         Image image = imageRepository2.findById(id).get();
 
         String imageDimensions = image.getDimensions();
@@ -47,7 +43,6 @@ public class ImageService {
         int imgb = Integer.parseInt(imgarray[1]); //B -- > integer
 
         return no_Images(scrl,scrb,imgl,imgb);
-
     }
 
     private int no_Images(int scrl, int scrb, int imgl, int imgb) {
@@ -55,6 +50,7 @@ public class ImageService {
         int lenB = scrb/imgb;
         return lenC*lenB;
     }
+
 
 }
 
